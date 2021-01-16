@@ -1,0 +1,42 @@
+<!-- Modal -->
+<!-- <div class="modal fade show" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="padding-right: 17px; display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div [style.display]="!isRegistered?'block':'none'">
+  <app-signup [email]="email" ></app-signup>
+</div>
+<div class="container rounded" style="display: flex;">
+ 
+<div class="card bg-light body-center" [style.display]="isRegistered?'block':'none'">
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+     
+      <div class="form-group input-group">
+         <label>
+          <input formControlName="email" class="form-control"  type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder=" ">
+          <span>Email</span>
+        </label>
+      </div> 
+      <div class="form-group">
+          <button type="submit" class="btn btn-block"  style="background-color: lightgreen;color:#fff"> Login </button>
+      </div>   
+  </form>
+  </article>
+  </div> 
+</div>

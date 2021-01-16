@@ -1,0 +1,38 @@
+<div class="container rounded" style="display: flex;">
+  <div class="card bg-light body-center rounded">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="login-form">
+          <div class="form-group input-group">
+            <label>
+             <input formControlName="Email" class="form-control" value="{{email}}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" type="text" name="email" id="email" placeholder=" ">
+             <span>Email</span>
+             <p *ngIf="signupForm.get('Email').hasError('required') && signupForm.get('Email').touched">
+              <small class="text-danger">Email is <strong>required</strong></small> <br>
+           </label>
+         </div> 
+         <div class="form-group input-group">
+          <label>
+           <input formControlName="FirstName" class="form-control"  type="text" placeholder=" ">
+           <span>First Name</span>
+           <p *ngIf="signupForm.get('FirstName').hasError('required') && signupForm.get('FirstName').touched">
+            <small class="text-danger">First Name is <strong>required</strong></small> <br>
+          </p>
+         </label>
+       </div> 
+       <div class="form-group input-group">
+        <label>
+         <input formControlName="LastName" class="form-control"  type="text" placeholder=" ">
+         <span>Last Name</span>
+         <p *ngIf="signupForm.get('LastName').hasError('required') && signupForm.get('LastName').touched">
+          <small class="text-danger">Last Name is <strong>required</strong></small> <br>
+        </p>
+       </label>
+     </div> 
+        <div class="form-group">
+            <button type="submit" class="btn btn-block" style="background-color: lightgreen;color:#fff"><i class="fa fa-sign-in-alt fa-lg fa-fw"></i> Create Account  </button>
+        </div> 
+    </form>
+    </article>
+    </div> 
+
+  </div> 
