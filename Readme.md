@@ -10,8 +10,9 @@ For backend I use .net core mvc api(visual studio 2019)
 For db I use Microsoft SQL Server Management Studio	12.0.2269.0
 
 How to use it
-at first u need to install node in your local machine
-install visual studio 2019
+at first u need to install visual studio 2019 
+install node in your local machine
+[You can do that by following my instraction at Readme.docx]
 install sql server 2012 or higher
 
 
