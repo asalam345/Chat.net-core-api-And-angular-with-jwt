@@ -16,8 +16,9 @@ install node in your local machine
 install sql server 2017 or higher
 [You can do that by following my instraction at How to Install Microsoft SQL Server 2017.docx]
 
-
-1. after openning the folder chat-ui you need to install by write command npm i
-2. open the .net core porject that means the api project on vs 2019 and run it by f5 key
-3. localhost:4200 open this url into 2 browsers
+1. open the .net core porject that means the api project on vs 2019 and run it by f5 key
+    [You may follow How to open chat-server.docx instruction]
+2. after openning the folder chat-ui you need to install by write command npm i
+    [You may follow How to open chat-ui.docx instruction]
+3. http://localhost:4200 open this url into 2 browsers
 4. login or registration and then chat....

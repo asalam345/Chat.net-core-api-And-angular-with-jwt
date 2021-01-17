@@ -51,9 +51,13 @@ scrollToBottom(): void {
     } catch(err) { }                 
 }
 logout(){
+  this.authService.logout().subscribe(s =>{
+    if(s){
   localStorage.clear();
   this.authService.loginStatus(this.senderId, false);
   this.router.navigate(['']);
+    }
+});
 }
 onEnter(){
   this.sendMessage();

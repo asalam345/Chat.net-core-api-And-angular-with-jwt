@@ -25,6 +25,9 @@ export class AuthService {
       
     }));
   }
+  public logout(){
+    return this.http.post<any>(Common.baseUrl + 'api/Users/logout','');    
+  }
   public signup(data: any)
   {
     const body = JSON.stringify(data);

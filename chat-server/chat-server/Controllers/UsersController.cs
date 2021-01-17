@@ -56,12 +56,23 @@ namespace chat_server.Controllers
             }
 
 		}
-        public async Task Logoff()
+        [HttpPost("logout")]
+        public async Task<bool> Logoff()
         {
-            await Task.Run(() =>
-            {
-                HttpContext.Session.Clear();
-            });
+			try
+			{
+                await Task.Run(() =>
+                {
+                    HttpContext.Session.Clear();
+                });
+                return true;
+            }
+			catch (Exception ex)
+			{
+                ex.ToString();
+                return false;
+			}
+            
         }
 
         async Task<IActionResult> loginDetails(UserVM model)
