@@ -10,13 +10,20 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using chat_server.Service;
 using System.Data;
+using chat_server.Entity.interfaces;
 
 namespace DAL
 {
-	public class DA_User : MySqlCommands, IGenericService<UserVM>
+	public class DA_User : MySqlCommands, IGenericService<UserVM>, IAuth<UserVM>
 	{
-		public DA_User()
+		public async Task<Result> Login(UserVM model)
 		{
+			model.ForLogin = true;
+			return await Get(model);
+		}
+		public async Task<Result> Register(UserVM model)
+		{
+			return await Entry(model);
 		}
 		public async Task<Result> Delete(long id)
 		{
@@ -57,11 +64,11 @@ namespace DAL
 						result.IsSuccess = false;
 						return await Task.FromResult<Result>(result);
 					}
-					//long userId = await getMaxRow("UserId", "tblUser") + 1;				
 
 					string query = @"INSERT INTO tblUser(UserId, email,firstname,lastName) VALUES
 								((SELECT 1 + coalesce(max(UserId), 0) FROM tblUser),'" 
 					+ _model.Email + "','" + _model.FirstName + "', '" + _model.LastName + "')";
+					result.Data = _model;
 					await InsertOrUpdateOrDelete(query);
 			}
 			catch (Exception ex)

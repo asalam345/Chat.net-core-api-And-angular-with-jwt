@@ -57,22 +57,27 @@ namespace chat_server.Controllers
 		[HttpPost]
 		public async Task<Result> Post([FromBody] MessageVM value)
 		{
-			HttpContext.Session.SetString("Key", "This is a test message.");
 			return await _genericService.Entry(value);
 		}
 
-		// PUT api/<GenericController>/5
 		[HttpPut]
 		public async Task<Result> Put([FromBody] MessageVM value)
 		{
-			return await _genericService.Update(value);
+			if (HttpContext.User.Identity.IsAuthenticated)
+			{
+				return await _genericService.Update(value);
+			}
+			return null;
 		}
 
-		// DELETE api/<GenericController>/5
 		[HttpDelete("{id}")]
 		public async Task<Result> Delete(long id)
 		{
-			return await _genericService.Delete(id);
+			if (HttpContext.User.Identity.IsAuthenticated)
+			{
+				return await _genericService.Delete(id);
+			}
+			return null;
 		}
 	}
 }

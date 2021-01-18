@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.interfaces;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace chat_server.Controllers
 {
 	[Route("api/[controller]")]
@@ -23,28 +21,44 @@ namespace chat_server.Controllers
 		[HttpGet]
 		public async Task<Result> Get([FromQuery] T model = null)
 		{
-			return await _genericService.Get(model);
+			if (User.Identity.IsAuthenticated)
+			{
+				return await _genericService.Get(model);
+			}
+			
+				return null;
+			
 		}
-
 		
 		[HttpPost]
 		public async Task<Result> Post([FromBody] T value)
 		{
-			return await _genericService.Entry(value);
+
+			if (User.Identity.IsAuthenticated)
+			{
+				return await _genericService.Entry(value);
+			}
+			return null;
 		}
 
-		// PUT api/<GenericController>/5
 		[HttpPut]
 		public async Task<Result> Put([FromBody] T value)
 		{
-			return await _genericService.Update(value);
+			if (User.Identity.IsAuthenticated)
+			{
+				return await _genericService.Update(value);
+			}
+			return null;
 		}
 
-		// DELETE api/<GenericController>/5
 		[HttpDelete("{id}")]
 		public async Task<Result> Delete(long id)
 		{
-			return await _genericService.Delete(id);
+			if (User.Identity.IsAuthenticated)
+			{
+				return await _genericService.Delete(id);
+			}
+			return null;
 		}
 	}
 }

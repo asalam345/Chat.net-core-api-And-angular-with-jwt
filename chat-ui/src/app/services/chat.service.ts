@@ -21,8 +21,8 @@ export class ChatService {
     return this.http.get<any>(Common.baseUrl + 'api/Chat/?SenderId=' + data.SenderId + '&ReceiverId='  + data.ReceiverId);//, { headers: reqHeader }
   }
   public delete(id:number){
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.delete<boolean>(Common.baseUrl + 'api/Chat/' + id, { headers: reqHeader });
+    //const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
+    return this.http.delete<boolean>(Common.baseUrl + 'api/Chat/' + id);//, { headers: reqHeader }
   }
   public deleteOneSide(id:number, isDeleteFromReceiver:boolean){
     const data = {
@@ -30,7 +30,7 @@ export class ChatService {
       IsDeleteFromReceiver: isDeleteFromReceiver
     }
     const body = JSON.stringify(data);
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.put<boolean>(Common.baseUrl + 'api/Chat', body, { headers: reqHeader });
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put(Common.baseUrl + 'api/Chat', body, { headers: reqHeader });//
   }
 }

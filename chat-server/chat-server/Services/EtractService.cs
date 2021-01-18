@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using chat_server.Entity.interfaces;
+using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Models;
@@ -21,6 +22,7 @@ namespace chat_server.Services
             services.AddScoped<IGenericService<UserVM>, DA_User>();
             services.AddScoped<IGenericService<MessageVM>, DA_Chat>();
             services.AddScoped<IGenericService<tblLogedinStatus>, DA_LogInStatus>();
+            services.AddScoped<IAuth<UserVM>, DA_User>();
         }
     }
     public class SessionIndexer

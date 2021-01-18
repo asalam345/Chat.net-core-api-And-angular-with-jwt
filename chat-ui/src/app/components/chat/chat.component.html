@@ -1,14 +1,20 @@
 <nav class="shadow bg-light rounded">
   <ul>
-     <li><a href="#">hi! {{firstName + " " + lastName}}</a>
+     <li><a href="javascript:void(0)">hi! {{firstName + " " + lastName}}</a>
         <ul>
            <li><button class="btn mce-btn-small danger" (click)="logout()" style="float: right;right:25px">Log Out</button>
            </li>
         </ul>
      </li>
+     <li><a href="javascript:void(0)"><em class="fa fa-bell"></em><em class="fa fa-circle red-circle" *ngIf="signalRService.receiverId.length > 0"></em></a>
+      <ul>
+         <li *ngFor="let opt of signalRService.receiverId" [value]="opt" (click)="onSelectUser(opt)">{{opt}}
+         </li>
+      </ul>
+   </li>
   </ul>
 </nav>
-<div class="container clearfix shadow">
+<div class="wrapper clearfix shadow" style="max-width: 760px; overflow: auto;background: #444753;">
   <div class="people-list" id="people-list">
     <ul class="list">
       <li class="clearfix" *ngFor="let opt of users" [value]="opt.userId" (click)="onSelectUser(opt.userId)" [class.selected]="opt.userId == receiverId">
@@ -41,7 +47,7 @@
               </div>
               <div class="message other-message float-right">
                 {{m.Text}}
-                <span class="delete-msg popup" (click)="popup4remove(m.ChatId)">
+                <span class="delete-msg popup delete-right" (click)="popup4remove(m.ChatId)">
                   <em class="fa fa-trash-alt"> </em>
                   <span class="popuptext" [class.show]="showpopup[m.ChatId]" >
                       <span (click)="deleteOneSide(m.ChatId, m.SenderId)">Remove Only From Me</span>
@@ -75,7 +81,7 @@
     </div> <!-- end chat-history -->
     <div style="clear: both;"></div>
     <div class="chat-message clearfix" >
-      <input class="text" type="text" lass="mt-3 mb-3 mr-3" [(ngModel)]="text" #chatText style="width: 85%;margin-top:10px;" placeholder="Type your message" (keyup.enter)="onEnter()"/>
+      <input (focus)="onFocusEvent($event)" class="text" type="text" lass="mt-3 mb-3 mr-3" [(ngModel)]="text" #chatText style="width: 85%;margin-top:10px;" placeholder="Type your message" (keyup)="onEnter($event)"/>
       <button  [disabled]="text.length==0" (click)="sendMessage()">Send</button>
 
     </div> <!-- end chat-message -->

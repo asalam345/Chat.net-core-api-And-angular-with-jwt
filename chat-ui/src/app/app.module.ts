@@ -11,7 +11,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EncryptionDescryptionService } from './services/encryption-descryption.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
 
@@ -34,7 +33,6 @@ import { AuthInterceptor } from './services/auth.interceptor';
     BrowserAnimationsModule,
   ],
   providers: [ 
-    EncryptionDescryptionService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

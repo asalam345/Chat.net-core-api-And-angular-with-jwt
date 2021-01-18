@@ -16,6 +16,8 @@ export class SignalrService {
   private connectionUrl = 'https://localhost:44319/signalr';
   private apiUrl = 'https://localhost:44319/api/chat';
   name: string;
+  public receiverId:number[] = [];
+  public senderId:number = 0;
 
   constructor(private http: HttpClient) {
     const fName = localStorage.getItem('firstName');
@@ -45,7 +47,7 @@ export class SignalrService {
   }
 
   public sendMessageToHub(chatId:number, message: string, sender:number, receiver:number) {
-    var promise = this.hubConnection.invoke("BroadcastAsync", this.buildChatMessage(chatId,message,sender,receiver))
+    var promise = this.hubConnection.invoke("SendMessageAsync", this.buildChatMessage(chatId,message,sender,receiver))
       .then(() => { console.log('message sent successfully to hub'); })
       .catch((err) => console.log('error while sending a message to hub: ' + err));
     return from(promise);
@@ -60,7 +62,6 @@ export class SignalrService {
   }
 
   private buildChatMessage(chatId:number, message: string, sender:number, receiver:number): chatMesage {
-    //;
     return {
       ConnectionId: this.hubConnection.connectionId,
       Text: message,
@@ -92,10 +93,13 @@ export class SignalrService {
       console.log("message received from Hub");
       if(!data.IsChnaged){
       this.messages.push(data);
-      console.log(this.messages);
+      if(data.SenderId != this.senderId){
+      this.receiverId.push(data.SenderId);
+      }
+      //console.log(this.messages);
       }else{
         this.messages = this.messages.filter(f => f.ChatId != data.ChatId);
-        console.log(this.messages);
+        //console.log(this.messages);
       }
     })
     this.hubConnection.on("newUserConnected", _ => {

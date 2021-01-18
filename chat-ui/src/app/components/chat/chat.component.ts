@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   public allMessages: chatMesage[];
   firstName:string;
   lastName:string;
+  isFirstTime: boolean = true;
   constructor(public signalRService: SignalrService, private router: Router
     , private authService: AuthService, private chatService: ChatService) {  }
 
@@ -39,16 +40,19 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.receiverId = s.data[0].userId;
       this.onSelectUser(this.receiverId);
     });
-    //this.scrollToBottom();
+    this.signalRService.senderId = this.senderId; 
   }
-  ngAfterViewChecked() {        
-    this.scrollToBottom();        
+  ngAfterViewChecked() {  
+    
 } 
 
 scrollToBottom(): void {
+  if(this.isFirstTime)   {
     try {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }                 
+        this.isFirstTime = false;
+    } catch(err) { }  
+  }               
 }
 logout(){
   this.authService.logout().subscribe(s =>{
@@ -59,15 +63,23 @@ logout(){
     }
 });
 }
-onEnter(){
+onFocusEvent(event: any){
+  //console.log(event.target.value);
+}
+onEnter(e){
+  //console.log(e);
+ //if (e.key === "Enter" && e.ctrlKey)
+ if (e.key === "Enter")
   this.sendMessage();
 }
 onSelectUser(id:number){
   this.receiverId = id;
   this.senderId = +localStorage.getItem('id');
- 
+  //this.isSelectedClick = true;
   this.getMessage();
+  this.signalRService.receiverId = this.signalRService.receiverId.filter(f => f != id);
 }
+
 getMessage():void{
   const data = {
     ReceiverId: this.receiverId,
@@ -89,7 +101,8 @@ getMessage():void{
       }
     });
     this.allMessages = this.signalRService.messages;
-    console.log(this.signalRService.messages);
+    //this.signalRService.receiverId = this.receiverId;  
+    setTimeout(()=>{  this.scrollToBottom(); }, 1000)
   });
 }
 sendMessage(): void {

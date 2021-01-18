@@ -9,7 +9,7 @@ body {
   font: 14px/20px "Lato", Arial, sans-serif;
   padding: 40px 0;
   color: white;
-  overflow: hidden!important;
+  /* overflow: hidden!important; */
 }
 
 .container {
@@ -18,17 +18,18 @@ body {
   background: #444753;
   border-radius: 5px;
   max-height: 90vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .people-list {
-  width: 260px;
+  width: auto;
   float: left;
   height: 90vh;
   overflow-y: scroll;
+  
 }
 .people-list .search {
-  padding: 20px;
+  padding: 10px;
 }
 .people-list input {
   border-radius: 3px;
@@ -64,11 +65,9 @@ body {
 .people-list .status {
   color: #92959E;
 }
-/* .message-data-name{
-	color: #434651;
-} */
+
 .chat {
-  width: calc(100% - 260px);
+  width: 500px;
   float: left;
   background: #F2F5F8;
   border-top-right-radius: 5px;
@@ -101,7 +100,7 @@ body {
   margin-top: 12px;
 }
 .chat .chat-history {
-  padding: 30px 30px 20px;
+  padding: 30px 10px 20px;
   border-bottom: 2px solid white;
   overflow-y: scroll;
   height: 82vh;
@@ -115,7 +114,7 @@ body {
 }
 .chat .chat-history .message {
   color: white;
-  padding: 15px 20px;
+  padding: 15px 10px;
   line-height: 15px;
   font-size: 16px;
   border-radius: 7px;
@@ -141,6 +140,7 @@ body {
 }
 .chat .chat-history .other-message {
   background: #94C2ED;
+  text-align: right;
 }
 .chat .chat-history .other-message:after {
   border-bottom-color: #94C2ED;
@@ -148,12 +148,12 @@ body {
 }
 .chat .chat-message {
   padding: 20px 10px;
-  width: calc(100% - 450px);
+  width: 500px;
   position: fixed;
   bottom: 0px;
 }
 .chat .chat-message .text {
-  width: 100%;
+  width: 450px;
   border: none;
   padding: 5px 5px;
   font: 14px/22px "Lato", Arial, sans-serif;
@@ -175,7 +175,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   background: transparent;
-  margin-right: 70px;
+  margin-right: 0px;
 	top: 13px;
 	position: relative;
 }
@@ -198,6 +198,13 @@ body {
 
 .me {
   color: #94C2ED;
+}
+.red-circle{
+  color:#e60f0f;
+  font-size: xx-small;
+    top: 7px;
+    position: absolute;
+    left: 22px;
 }
 
 .align-left {
@@ -237,6 +244,13 @@ ul li{
     cursor: pointer;
     position: relative;
     margin-top: -5px;
+    display: none;
+}
+.message:hover .delete-msg{
+  display: block;
+}
+.delete-right{
+  float: left;
 }
 .avatar{
 	width: 30px; height: 30px; border-radius: 50%;

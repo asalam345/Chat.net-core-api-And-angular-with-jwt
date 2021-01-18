@@ -48,9 +48,9 @@ onSubmit() {
   this.authService.signup(this.signupForm.value)
   .subscribe((user: any) => {
     if (user.data.email != null){
-      this.authService.localStorageSet(user);
-      this.authService.loginStatus(user.data.userId, true);
-      this.router.navigate(['chat']);
+      //this.authService.localStorageSet(user.data);
+      //this.authService.loginStatus(user.data.userId, true);
+      this.router.navigate(['login']);
     }
     else {
     const message = user.message;

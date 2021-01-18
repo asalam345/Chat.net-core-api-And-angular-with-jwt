@@ -14,7 +14,7 @@ namespace chat_server
         {
             _genericService = genericService;
         }
-        public async Task BroadcastAsync(ChatMessage chat)
+        public async Task SendMessageAsync(ChatMessage chat)
         {
 			try
 			{
@@ -30,6 +30,7 @@ namespace chat_server
                         chat.ChatId = Convert.ToInt64(((string[])result.Data)[0]);
                         chat.Time = ((string[])result.Data)[1];
                         await Clients.All.MessageReceivedFromHub(chat);
+                        //await Clients.User(chat.ReceiverId.ToString()).MessageReceivedFromHub(chat);
                     }
                 }
 				else

@@ -32,12 +32,12 @@ export class AuthService {
   {
     const body = JSON.stringify(data);
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.post(Common.baseUrl + 'api/users', body, { headers: reqHeader });
+    return this.http.post(Common.baseUrl + 'api/users/register', body, { headers: reqHeader });
   }
 
   getUsers(id:number){
-    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
-    return this.http.get<any>(Common.baseUrl + 'api/Users/?UserId=' + id + '&Email=null&FirstName=null&LastName=null', { headers: reqHeader });
+    //const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.get<any>(Common.baseUrl + 'api/Users/?UserId=' + id + '&Email=null&FirstName=null&LastName=null');
   }
   localStorageSet(user: any){
     localStorage.setItem('token', user.token);

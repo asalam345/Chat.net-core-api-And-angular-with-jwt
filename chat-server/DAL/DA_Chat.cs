@@ -15,9 +15,6 @@ namespace DAL
 {
 	public class DA_Chat : MySqlCommands, IGenericService<MessageVM>
     {
-        public DA_Chat() 
-        {
-        }
         public async Task<Result> Get(MessageVM model)
 		{
             Result result = DefaultResult("Success");
