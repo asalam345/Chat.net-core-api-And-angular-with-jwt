@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Common } from '../common/common';
-import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IpService } from '../ip.service';
 
 // @Injectable({
@@ -15,7 +14,7 @@ export class AuthService {
   public authenticate(loginData: any)
   {
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
-    return this.http.post<any>(Common.baseUrl + 'api/Users/login', loginData, {headers: reqHeader})
+    return this.http.post<any>(Common.baseUrl + 'api/auth/login', loginData, {headers: reqHeader})
     .pipe(map((user:any) => {
       console.log(user);
       if(user != null){
@@ -26,13 +25,13 @@ export class AuthService {
     }));
   }
   public logout(){
-    return this.http.post<any>(Common.baseUrl + 'api/Users/logout','');    
+    return this.http.post<any>(Common.baseUrl + 'api/auth/logout','');    
   }
   public signup(data: any)
   {
     const body = JSON.stringify(data);
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.http.post(Common.baseUrl + 'api/users/register', body, { headers: reqHeader });
+    return this.http.post(Common.baseUrl + 'api/auth/register', body, { headers: reqHeader });
   }
 
   getUsers(id:number){

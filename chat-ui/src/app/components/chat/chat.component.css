@@ -20,7 +20,11 @@ body {
   max-height: 90vh;
   /* overflow: hidden; */
 }
-
+.wrapper{
+  display: flex;
+  margin: auto 15%;
+  max-width: 760px; overflow: auto;background: #444753;
+}
 .people-list {
   width: auto;
   float: left;
@@ -103,7 +107,7 @@ body {
   padding: 30px 10px 20px;
   border-bottom: 2px solid white;
   overflow-y: scroll;
-  height: 82vh;
+  height: 80vh;
 }
 .chat .chat-history .message-data {
   margin-bottom: 15px;
@@ -147,10 +151,12 @@ body {
   left: 93%;
 }
 .chat .chat-message {
-  padding: 20px 10px;
-  width: 500px;
-  position: fixed;
+  padding: 5px 5px;
+  width: auto;
+  position: relative;
+  display: flex;
   bottom: 0px;
+  background: #444753;
 }
 .chat .chat-message .text {
   width: 450px;
@@ -176,7 +182,7 @@ body {
   font-weight: bold;
   background: transparent;
   margin-right: 0px;
-	top: 13px;
+	top: 7px;
 	position: relative;
 }
 .chat .chat-message button:hover {
@@ -236,14 +242,14 @@ ul li{
 
 .delete-msg{
 	float: right;
-	right: 10px;
+	right: 5px;
 	color:red;
 	margin: 0 10px;
 	font-size: smaller;
     /* font-weight: 700; */
     cursor: pointer;
     position: relative;
-    margin-top: -5px;
+    margin-top: -2px;
     display: none;
 }
 .message:hover .delete-msg{
@@ -276,24 +282,34 @@ nav.rounded{
 }
 nav ul{
 float: right;
-right:10px;
+margin-right:50px;
 }
 nav li {
 	display: inline-block;
 	list-style-type: none;
 	position: relative;
-	
+  margin-right: 20px;
+  white-space: nowrap;
  }
- 
+ nav li:last-child .nofication {
+  margin-right: 50px;
+ }
+ ul .nofication-name{
+  background-color: transparent!important;
+ }
+  li .nofication-name{
+   right: 100px!important;
+   cursor: pointer;
+ }
  nav li ul {
 	display: none;
 	position: absolute;
-	width: 100px;
+	width: auto;
 	left: 0;
-	/* top: 100%; */
 	margin: 0;
 	padding: 0;
-	border-radius: 5px;
+  border-radius: 5px;
+  padding: 1px 3px;
  }
  
  nav li:hover > ul {

@@ -6,15 +6,15 @@
            </li>
         </ul>
      </li>
-     <li><a href="javascript:void(0)"><em class="fa fa-bell"></em><em class="fa fa-circle red-circle" *ngIf="signalRService.receiverId.length > 0"></em></a>
-      <ul>
-         <li *ngFor="let opt of signalRService.receiverId" [value]="opt" (click)="onSelectUser(opt)">{{opt}}
+     <li class="nofication"><a href="javascript:void(0)"><em class="fa fa-bell"></em><em class="fa fa-circle red-circle" *ngIf="signalRService.receiverIds.length > 0"></em></a>
+      <ul class="nofication-name">
+         <li class="nofication-name" *ngFor="let opt of getNameFromId(signalRService.receiverIds)" [value]="opt.id" (click)="onSelectUser(opt.id)">{{opt.name}}
          </li>
       </ul>
    </li>
   </ul>
 </nav>
-<div class="wrapper clearfix shadow" style="max-width: 760px; overflow: auto;background: #444753;">
+<div class="wrapper py-1 px-0 clearfix shadow">
   <div class="people-list" id="people-list">
     <ul class="list">
       <li class="clearfix" *ngFor="let opt of users" [value]="opt.userId" (click)="onSelectUser(opt.userId)" [class.selected]="opt.userId == receiverId">

@@ -47,12 +47,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 } 
 
 scrollToBottom(): void {
-  if(this.isFirstTime)   {
     try {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
         this.isFirstTime = false;
     } catch(err) { }  
-  }               
 }
 logout(){
   this.authService.logout().subscribe(s =>{
@@ -77,7 +75,7 @@ onSelectUser(id:number){
   this.senderId = +localStorage.getItem('id');
   //this.isSelectedClick = true;
   this.getMessage();
-  this.signalRService.receiverId = this.signalRService.receiverId.filter(f => f != id);
+  if(this.signalRService.receiverIds.length > 0) {this.signalRService.receiverIds = this.signalRService.receiverIds.splice(id);}
 }
 
 getMessage():void{
@@ -120,6 +118,17 @@ this.chatService.delete(id).subscribe(s =>{
       error: (err) => console.error(err)
     });
 });
+}
+public getNameFromId(ids: number[]):string[]{
+  const user: any[] = [];
+  ids.forEach(id => {
+    let aUser:any = this.users.filter(f => +f.userId == +id);
+    if (aUser.length > 0){
+      user.push({name:aUser[0].firstName + ' ' + aUser[0].lastName, id: id});
+    }
+  });
+  
+  return user;
 }
 public deleteOneSide(id:number, sender:number){
   const isDeleteFromReceiver = sender === this.receiverId ? true : false;
